@@ -21,7 +21,7 @@ const AppHeader = () => {
           <a
             target='_blank'
             rel='noopener noreferrer'
-            href='https://app.netlify.com/start/deploy?repository=https://github.com/netlify/netlify-faunadb-example&stack=fauna'
+            href='https://app.netlify.com/start/deploy?repository=https://github.com/ptpaterson/netlify-faunadb-graphql-auth&stack=fauna'
           >
             <img
               src={deployButton}
@@ -33,7 +33,7 @@ const AppHeader = () => {
             <a
               target='_blank'
               rel='noopener noreferrer'
-              href='https://github.com/netlify/netlify-faunadb-example'
+              href='https://github.com/ptpaterson/netlify-faunadb-graphql-auth'
             >
               <img
                 className='github-icon'

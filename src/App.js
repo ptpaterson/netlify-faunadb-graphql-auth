@@ -17,7 +17,14 @@ const App = () => {
   )
 
   if (loggedInLoading) return <p>Loading...</p>
-  if (!loggedInData?.loggedIn) return <LoginModal />
+
+  if (!loggedInData?.loggedIn)
+    return (
+      <div>
+        <Header />
+        <LoginModal />
+      </div>
+    )
 
   return (
     <div>
