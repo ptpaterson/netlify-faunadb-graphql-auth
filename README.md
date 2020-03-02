@@ -1,4 +1,4 @@
-# Netlify + FaunaDB &nbsp;&nbsp;&nbsp;<a href="https://app.netlify.com/start/deploy?repository=https://github.com/ptpaterson/netlify-faunadb-graphql-auth&stack=fauna"><img src="https://www.netlify.com/img/deploy/button.svg"></a>
+# Netlify + FaunaDB + GraphQL + Auth &nbsp;&nbsp;&nbsp;<a href="https://app.netlify.com/start/deploy?repository=https://github.com/ptpaterson/netlify-faunadb-graphql-auth&stack=fauna"><img src="https://www.netlify.com/img/deploy/button.svg"></a>
 
 Example of using [FaunaDB](https://fauna.com/) with [Netlify functions](https://www.netlify.com/docs/functions/).
 
