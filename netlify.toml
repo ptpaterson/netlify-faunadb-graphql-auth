@@ -1,0 +1,8 @@
+[build]
+  functions = "functions"
+  # This will be run the site build
+  command = "npm run build"
+  # This is the directory is publishing to netlify's CDN
+  publish = "dist"
+
+  # note: netlify dev works out of the box with create-react-app

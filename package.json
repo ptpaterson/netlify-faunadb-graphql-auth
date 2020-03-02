@@ -1,0 +1,43 @@
+{
+  "name": "netlify-faunadb-graphql-auth",
+  "version": "0.1.0",
+  "description": "Netlify functions example with faunadb, graphql, and authorization",
+  "scripts": {
+    "bootstrap-db": "node scripts/bootstrap-fauna-database.js",
+    "bootstrap-example-data": "node scripts/create-example-data.js",
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html",
+    "format": "prettier \"src/**/*.{js,html}\" --write",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+  },
+  "keywords": [
+    "netlify",
+    "faunadb",
+    "graphql"
+  ],
+  "author": "Paul Paterson",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.0.0-beta.38",
+    "apollo-link-context": "^1.0.19",
+    "apollo-link-http": "^1.5.16",
+    "apollo-server-lambda": "^2.10.1",
+    "apollo-server-plugin-http-headers": "^0.1.3",
+    "draft-js": "^0.11.4",
+    "faunadb": "^2.11.1",
+    "graphql": "^14.6.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.19.1"
+  }
+}

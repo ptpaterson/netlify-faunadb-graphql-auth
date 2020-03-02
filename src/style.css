@@ -1,0 +1,180 @@
+body {
+  padding: 0;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  padding: 6px 13px;
+  font-family: inherit;
+  border: 1px solid #e9ebeb;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #0e1e25de;
+  box-shadow: 0 2px 4px 0 #0e1e251f;
+  transition: all 0.2s ease;
+  transition-property: background-color, color, border, box-shadow;
+  cursor: pointer;
+}
+
+button:focus,
+button:hover {
+  background-color: #f5f5f5;
+  color: #0e1e25de;
+  box-shadow: 0 8px 12px 0 #e9ebeb29, 0 2px 8px 0 #00000014;
+  text-decoration: none;
+}
+
+.btn-danger {
+  background-color: #fb6d77;
+  border-color: #fb6d77;
+  border-bottom-color: #e6636b;
+  color: #fff;
+}
+.btn-danger:focus,
+.btn-danger:hover {
+  background-color: #fa3b49;
+  border-color: #fa3b49;
+  color: #fff;
+}
+
+.todo-create-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.todo-create-wrapper > * {
+  margin-left: 20px;
+}
+
+.todo-create-input {
+  min-width: 150px;
+  flex-grow: 1;
+  box-shadow: 0px 0px 0px 2px rgba(120, 130, 152, 0.25);
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.todo-create-input:hover,
+.todo-create-input:active,
+.todo-create-input:focus {
+  box-shadow: 0px 0px 0px 2px rgb(43, 190, 185);
+  box-shadow: 0px 0px 0px 2px #00ad9f;
+}
+
+.todo-list {
+  max-width: 600px;
+}
+
+.todo-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.todo-list li {
+  list-style-type: none;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  min-height: 43px;
+
+  padding: 0 20px;
+}
+
+.todo-item > * {
+  margin-left: 20px;
+}
+
+.todo-item-title {
+  color: #5a5a5a;
+  flex-grow: 1;
+  min-width: 150px;
+  padding: 8px;
+  border-radius: 4px;
+
+  box-shadow: 1px 1px 3px 3px #00000010;
+}
+
+.todo-item.todo-checked .todo-item-title {
+  background-color: #83ffc1;
+}
+
+.content-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+  padding-left: 20px;
+}
+
+.app-logo {
+  height: 95px;
+}
+.app-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.app-title-wrapper > div {
+  margin-left: 20px;
+}
+
+.app-title-text {
+  flex-grow: 1;
+}
+
+.app-title {
+  font-size: 1.6rem;
+}
+.deploy-button {
+  width: 200px;
+}
+.view-src {
+  text-align: center;
+}
+.view-src a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.github-icon {
+  width: 25px;
+  margin: 5px;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .app-title-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .app-title {
+    font-size: 23px;
+  }
+  .app-intro {
+    font-size: 14px;
+  }
+  .app-header {
+    padding-left: 20px;
+    height: auto;
+  }
+  .app-logo {
+    height: 60px;
+    animation: none;
+  }
+  .deploy-button {
+    width: 150px;
+  }
+}

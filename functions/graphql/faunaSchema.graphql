@@ -1,0 +1,30 @@
+type User {
+  email: String! @unique
+  todos: [Todo] @relation
+}
+
+type Todo {
+  title: String!
+  completed: Boolean!
+  owner: User
+}
+
+input UserTodoInput {
+  title: String!
+  completed: Boolean!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Query {
+  me: User! @resolver(name: "me")
+}
+
+type Mutation {
+  login(data: LoginInput): String! @resolver(name: "login")
+  logout: Boolean! @resolver(name: "logout") @resolver(name: "logout")
+  userCreateTodo(data: UserTodoInput): Todo! @resolver(name: "user_create_todo")
+}
