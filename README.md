@@ -1,4 +1,4 @@
-# Netlify + FaunaDB &nbsp;&nbsp;&nbsp;<a href="https://app.netlify.com/start/deploy?repository=https://github.com/netlify/netlify-faunadb-example&stack=fauna"><img src="https://www.netlify.com/img/deploy/button.svg"></a>
+# Netlify + FaunaDB &nbsp;&nbsp;&nbsp;<a href="https://app.netlify.com/start/deploy?repository=https://github.com/ptpaterson/netlify-faunadb-graphql-auth&stack=fauna"><img src="https://www.netlify.com/img/deploy/button.svg"></a>
 
 Example of using [FaunaDB](https://fauna.com/) with [Netlify functions](https://www.netlify.com/docs/functions/).
 
@@ -29,7 +29,7 @@ So there is no need to install `netlify-lambda` and set up function proxies.
 1. Clone down the repository
 
    ```bash
-   git clone https://github.com/---
+   git clone https://github.com/ptpaterson/netlify-faunadb-graphql-auth.git
    ```
 
 2. Enter the repo directory
@@ -143,7 +143,7 @@ So there is no need to install `netlify-lambda` and set up function proxies.
 
     - Click “GraphQL” in the left navigation
     - Click “IMPORT SCHEMA”
-    - Upload the schema at `functions/graphql/faunaSchema.graphql`
+    - Upload the schema at [`functions/graphql/faunaSchema.graphql`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/functions/graphql/faunaSchema.graphql)
 
 11. (Optional) Add example data
 
@@ -173,4 +173,4 @@ So there is no need to install `netlify-lambda` and set up function proxies.
 
 ## Updating the Schema
 
-This project uses `apollo-server-lambda` for the lambda function. Lambdas are [not a great solution for fetching remote schemas](https://github.com/apollographql/apollo-server/issues/3190). Because of this, any time a new schema is uploaded to FaunaDB, the SDL should be downloaded and placed as a string in `functions/graphql/remoteSchema.js`.
+This project uses `apollo-server-lambda` for the lambda function. Lambdas are [not a great solution for fetching remote schemas](https://github.com/apollographql/apollo-server/issues/3190). Because of this, any time a new schema is uploaded to FaunaDB, the SDL should be downloaded and placed as a string in [`functions/graphql/remoteSchema.js`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/functions/graphql/remoteSchema.js).

@@ -5,4 +5,4 @@
   # This is the directory is publishing to netlify's CDN
   publish = "dist"
 
-  # note: netlify dev works out of the box with create-react-app
+  # note: netlify dev works out of the box with parcel-bundler (or create-react-app)
