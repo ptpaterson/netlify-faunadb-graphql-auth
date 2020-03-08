@@ -15,7 +15,8 @@ export default function TodoCreateForm() {
 
     const variables = {
       data: {
-        title: title.value
+        title: title.value,
+        completed: false
       }
     }
     runUserCreateTodoMutation({
