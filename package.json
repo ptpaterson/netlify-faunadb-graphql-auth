@@ -1,6 +1,6 @@
 {
   "name": "netlify-faunadb-graphql-auth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Netlify functions example with faunadb, graphql, and authorization",
   "scripts": {
     "build": "parcel build src/index.html",
@@ -11,7 +11,8 @@
   "keywords": [
     "netlify",
     "faunadb",
-    "graphql"
+    "graphql",
+    "http-cookies"
   ],
   "author": "Paul Paterson",
   "license": "MIT",
