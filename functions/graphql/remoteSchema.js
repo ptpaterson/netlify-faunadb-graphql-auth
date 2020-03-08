@@ -1,4 +1,4 @@
-const schema = `
+const remoteTypeDefs = `
 scalar Date
 
 input LoginInput {
@@ -139,4 +139,7 @@ input UserTodosRelation {
 }
 `
 
-module.exports = schema
+module.exports = {
+  remoteTypeDefs
+}
+

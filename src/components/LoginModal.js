@@ -22,8 +22,10 @@ const LoginModal = () => {
     event.preventDefault()
     runLoginMutation({
       variables: {
-        email: email.value,
-        password: password.value
+        data: {
+          email: email.value,
+          password: password.value
+        }
       }
     })
   }
