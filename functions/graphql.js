@@ -1,4 +1,3 @@
-const { buildSchema } = require('graphql')
 const {
   ApolloServer,
 
@@ -30,7 +29,7 @@ const http = new createHttpLink({
 // 1) Create the remote schema
 // *****************************************************************************
 // setContext links runs before any remote request by `delegateToSchema`
-const link = setContext((request, previousContext) => {
+const link = setContext((_, previousContext) => {
   let token = process.env.FAUNADB_PUBLIC_KEY // public token
   const event = previousContext.graphqlContext.event
 
@@ -50,9 +49,8 @@ const link = setContext((request, previousContext) => {
 // using introspectSchema is not a good idea with a AWS lambda function
 // schema was downloaded from fauna and saved to local file.
 const { remoteTypeDefs } = require('./graphql/remoteSchema')
-const remoteSchema = buildSchema(remoteTypeDefs)
 const remoteExecutableSchema = makeRemoteExecutableSchema({
-  schema: remoteSchema,
+  schema: remoteTypeDefs,
   link
 })
 
