@@ -135,7 +135,7 @@ In the Fauna Cloud Console:
 
   - Click “GraphQL” in the left navigation
   - Click “IMPORT SCHEMA”
-  - Upload the schema at [`functions/graphql/faunaSchema.graphql`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/functions/graphql/faunaSchema.graphql)
+  - Upload the schema at [`scripts/faunaSchema.graphql`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/scripts/faunaSchema.graphql)
 
 11. (Optional) Add example data
 
