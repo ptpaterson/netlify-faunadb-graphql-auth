@@ -12,8 +12,6 @@ The todo editing is enabled by [Draft.js](https://draftjs.org/)
 
 This project is primarily derived from [netlify-faunadb-example](https://github.com/netlify/netlify-faunadb-example)
 
-![faunadb netlify](https://user-images.githubusercontent.com/532272/42067494-5c4c2b94-7afb-11e8-91b4-0bef66d85584.png)
-
 ## Easy setup with Netlify dev
 
 [Netlify Dev](https://www.netlify.com/products/dev/) works with `parcel-bundler` out of the box!
