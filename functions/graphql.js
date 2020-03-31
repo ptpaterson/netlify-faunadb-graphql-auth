@@ -20,16 +20,13 @@ const httpHeadersPlugin = require('apollo-server-plugin-http-headers')
 const fetch = require('node-fetch')
 const cookie = require('cookie')
 
-const http = new createHttpLink({
+const httpLink = new createHttpLink({
   uri: 'https://graphql.fauna.com/graphql',
   fetch
 })
 
-// *****************************************************************************
-// 1) Create the remote schema
-// *****************************************************************************
 // setContext links runs before any remote request by `delegateToSchema`
-const link = setContext((_, previousContext) => {
+const contextlink = setContext((_, previousContext) => {
   let token = process.env.FAUNADB_PUBLIC_KEY // public token
   const event = previousContext.graphqlContext.event
 
@@ -44,7 +41,14 @@ const link = setContext((_, previousContext) => {
       Authorization: `Bearer ${token}`
     }
   }
-}).concat(http)
+})
+
+const link = contextlink.concat(httpLink)
+
+// *****************************************************************************
+// 1) Create the remote schema
+// *****************************************************************************
+
 
 // using introspectSchema is not a good idea with a AWS lambda function
 // schema was downloaded from fauna and saved to local file.
