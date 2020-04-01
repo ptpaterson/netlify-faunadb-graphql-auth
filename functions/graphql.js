@@ -9,18 +9,20 @@ const {
    * work with FaunaDB yet.
    */
   FilterRootFields,
+  introspectSchema,
   mergeSchemas,
   makeExecutableSchema,
   makeRemoteExecutableSchema,
   transformSchema
 } = require('apollo-server-lambda')
 const { setContext } = require('apollo-link-context')
-const { createHttpLink } = require('apollo-link-http')
+const { HttpLink } = require('apollo-link-http')
 const httpHeadersPlugin = require('apollo-server-plugin-http-headers')
 const fetch = require('node-fetch')
 const cookie = require('cookie')
 
-const httpLink = new createHttpLink({
+// HTTP link will be what does the talking with the FaunaDB native API
+const httpLink = new HttpLink({
   uri: 'https://graphql.fauna.com/graphql',
   fetch
 })
@@ -28,12 +30,14 @@ const httpLink = new createHttpLink({
 // setContext links runs before any remote request by `delegateToSchema`
 const contextlink = setContext((_, previousContext) => {
   let token = process.env.FAUNADB_PUBLIC_KEY // public token
-  const event = previousContext.graphqlContext.event
 
-  if (event.headers.cookie) {
-    const parsedCookie = cookie.parse(event.headers.cookie)
-    const cookieSecret = parsedCookie['fauna-token']
-    if (cookieSecret) token = cookieSecret
+  if (previousContext && previousContext.graphqlContext) {
+    const event = previousContext.graphqlContext.event
+    if (event.headers.cookie) {
+      const parsedCookie = cookie.parse(event.headers.cookie)
+      const cookieSecret = parsedCookie['fauna-token']
+      if (cookieSecret) token = cookieSecret
+    }
   }
 
   return {
@@ -43,76 +47,91 @@ const contextlink = setContext((_, previousContext) => {
   }
 })
 
+// chain the links
 const link = contextlink.concat(httpLink)
 
-// *****************************************************************************
-// 1) Create the remote schema
-// *****************************************************************************
+// create a yet undefined handler, so that we can define it during the first req
+let handler
 
+const getHandler = async () => {
+  if (handler) return handler
 
-// using introspectSchema is not a good idea with a AWS lambda function
-// schema was downloaded from fauna and saved to local file.
-const { remoteTypeDefs } = require('./graphql/remoteSchema')
-const remoteExecutableSchema = makeRemoteExecutableSchema({
-  schema: remoteTypeDefs,
-  link
-})
+  console.log('getHandler: creating new server')
 
-// remove root fields that we don't want available to the client
-const transformedRemoteSchema = transformSchema(remoteExecutableSchema, [
-  new FilterRootFields(
-    (operation, rootField) =>
-      !['createTodo', 'createUser', 'deleteUser', 'findUserByID'].includes(
-        rootField
-      )
-  )
-])
+  // *****************************************************************************
+  // 1) Create the remote schema
+  // *****************************************************************************
+  // using introspectSchema is an okay method in a lambda function, but not if you
+  // are constantly polling, like in Apollo Gateway.
 
-// *****************************************************************************
-// 2) Create a schema for resolvers that are not in the remote schema
-// *****************************************************************************
+  // schema was downloaded from fauna and saved to local file.
+  // const { remoteTypeDefs } = require('./graphql/remoteSchema')
+  const remoteExecutableSchema = makeRemoteExecutableSchema({
+    schema: await introspectSchema(link),
+    link
+  })
 
-const { localTypeDefs, localResolvers } = require('./graphql/localSchema')
-const localExecutableSchema = makeExecutableSchema({
-  typeDefs: localTypeDefs,
-  resolvers: localResolvers
-})
+  // remove root fields that we don't want available to the client
+  const transformedRemoteSchema = transformSchema(remoteExecutableSchema, [
+    new FilterRootFields(
+      (operation, rootField) =>
+        !['createTodo', 'createUser', 'deleteUser', 'findUserByID'].includes(
+          rootField
+        )
+    )
+  ])
 
-// *****************************************************************************
-// 3) create typedefs and resolvers that override
-// *****************************************************************************
+  // *****************************************************************************
+  // 2) Create a schema for resolvers that are not in the remote schema
+  // *****************************************************************************
 
-const {
-  overrideTypeDefs,
-  createOverrideResolvers
-} = require('./graphql/overrideSchema')
+  const { localTypeDefs, localResolvers } = require('./graphql/localSchema')
+  const localExecutableSchema = makeExecutableSchema({
+    typeDefs: localTypeDefs,
+    resolvers: localResolvers
+  })
 
-// *****************************************************************************
-// 4) put it all together
-// *****************************************************************************
+  // *****************************************************************************
+  // 3) create typedefs and resolvers that override
+  // *****************************************************************************
 
-const schema = mergeSchemas({
-  schemas: [overrideTypeDefs, localExecutableSchema, transformedRemoteSchema],
-  resolvers: createOverrideResolvers(remoteExecutableSchema)
-})
+  const {
+    overrideTypeDefs,
+    createOverrideResolvers
+  } = require('./graphql/overrideSchema')
 
-// *****************************************************************************
-// 5) Run the server
-// *****************************************************************************
+  // *****************************************************************************
+  // 4) put it all together
+  // *****************************************************************************
 
-const server = new ApolloServer({
-  schema,
-  plugins: [httpHeadersPlugin],
-  context: ({ event, context }) => {
-    // console.log(event)
+  const schema = mergeSchemas({
+    schemas: [overrideTypeDefs, localExecutableSchema, transformedRemoteSchema],
+    resolvers: createOverrideResolvers(remoteExecutableSchema)
+  })
 
-    return {
-      event,
-      context,
-      setCookies: [],
-      setHeaders: []
+  // *****************************************************************************
+  // 5) Run the server
+  // *****************************************************************************
+
+  const server = new ApolloServer({
+    schema,
+    plugins: [httpHeadersPlugin],
+    context: ({ event, context }) => {
+      // console.log(event)
+
+      return {
+        event,
+        context,
+        setCookies: [],
+        setHeaders: []
+      }
     }
-  }
-})
+  })
+  handler = server.createHandler()
 
-exports.handler = server.createHandler()
+  return handler
+}
+
+exports.handler = (event, context, callback) => {
+  getHandler().then((handler) => handler(event, context, callback))
+}
