@@ -175,4 +175,4 @@ In the Fauna Cloud Console:
 
 ## Updating the Schema
 
-This project uses `apollo-server-lambda` for the lambda function. Lambdas are [not a great solution for fetching remote schemas](https://github.com/apollographql/apollo-server/issues/3190). Because of this, any time a new schema is uploaded to FaunaDB, the SDL should be downloaded and placed as a string in [`functions/graphql/remoteSchema.js`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/functions/graphql/remoteSchema.js).
+This project uses `apollo-server-lambda` for the lambda function. Lambdas are [not a great solution for constantly polling remote schemas](https://github.com/apollographql/apollo-server/issues/3190). I've also had trouble with async lambda's in general.  Because of this, any time a new schema is uploaded to FaunaDB, the SDL should be downloaded and placed as a string in [`functions/graphql/remoteSchema.js`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/functions/graphql/remoteSchema.js).
