@@ -4,7 +4,7 @@ Example of using [FaunaDB](https://fauna.com/) with [Netlify functions](https://
 
 This example shows how to use HTTP only cookies for auth with FaunaDB's native Graphql API.
 
-<img src="https://user-images.githubusercontent.com/7998974/78754740-02363500-7946-11ea-915d-15ce81499480.PNG" width="280">  <img src="https://user-images.githubusercontent.com/7998974/78755012-7244bb00-7946-11ea-9b18-08735b4d61a8.PNG" width="280">
+<img src="https://user-images.githubusercontent.com/7998974/78754740-02363500-7946-11ea-915d-15ce81499480.PNG" width="420">  <img src="https://user-images.githubusercontent.com/7998974/78755012-7244bb00-7946-11ea-9b18-08735b4d61a8.PNG" width="420">
 
 ## About this application
 
