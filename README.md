@@ -4,6 +4,8 @@ Example of using [FaunaDB](https://fauna.com/) with [Netlify functions](https://
 
 This example shows how to use HTTP only cookies for auth with FaunaDB's native Graphql API.
 
+<img src="https://user-images.githubusercontent.com/7998974/78754740-02363500-7946-11ea-915d-15ce81499480.PNG" width="280">  <img src="https://user-images.githubusercontent.com/7998974/78755012-7244bb00-7946-11ea-9b18-08735b4d61a8.PNG" width="280">
+
 ## About this application
 
 This application is using [React](https://reactjs.org/) for the frontend, [Netlify Functions](https://www.netlify.com/docs/functions/) for API calls, and [FaunaDB](https://fauna.com/) as the backing database, utilizing the Graphql API with [Apollo](https://www.apollographql.com/docs/apollo-server/deployment/lambda/). This project is bundled with [Parcel](https://parceljs.org/).
@@ -11,6 +13,8 @@ This application is using [React](https://reactjs.org/) for the frontend, [Netli
 The todo editing is enabled by [Draft.js](https://draftjs.org/)
 
 This project is primarily derived from [netlify-faunadb-example](https://github.com/netlify/netlify-faunadb-example)
+
+It has been updated to be better and more responsive stylings!
 
 ## Easy setup with Netlify dev
 
