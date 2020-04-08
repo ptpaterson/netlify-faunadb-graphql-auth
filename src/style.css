@@ -1,14 +1,35 @@
+/* This is "Mobile First" */
+
+/* simple grid system */
+
+.span-2-1,
+.span-2-2 {
+  grid-column: span 2;
+}
+
+html {
+  font-size: 16px;
+}
+
 body {
   padding: 0;
+  margin: 0;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-size: 1.2rem;
+}
+
+h1 {
+  margin: 0;
 }
 
 button {
   padding: 6px 13px;
   font-family: inherit;
+  font-size: inherit;
   border: 1px solid #e9ebeb;
   border-radius: 4px;
   background-color: #fff;
@@ -17,6 +38,10 @@ button {
   transition: all 0.2s ease;
   transition-property: background-color, color, border, box-shadow;
   cursor: pointer;
+}
+
+input {
+  font-size: inherit;
 }
 
 button:focus,
@@ -40,20 +65,44 @@ button:hover {
   color: #fff;
 }
 
-.todo-create-wrapper {
+.content {
+  padding: 1.2rem;
+  display: grid;
+  grid-gap: 1.44rem;
+}
+
+.login-form {
+  padding: 1rem;
   display: flex;
-  align-items: center;
-  padding: 20px;
+  justify-content: center;
+}
+
+.login-form form {
+  padding: 1.25rem;
+
+  display: grid;
+  grid-gap: 0.75rem;
+  grid-template-columns: 1fr 2fr;
+
+  box-shadow: 0px 0px 0px 2px #78829840;
 }
 
 .todo-create-wrapper > * {
-  margin-left: 20px;
+  margin: 0;
+}
+
+.todo-create-wrapper {
+  padding: .75rem;
+  display: grid;
+  grid-gap: .5rem;
+  background-color: #f8f8f8;  
+  box-shadow: 0px 0px 0px 2px #78829840;
+  border-radius: .5rem;
 }
 
 .todo-create-input {
   min-width: 150px;
-  flex-grow: 1;
-  box-shadow: 0px 0px 0px 2px rgba(120, 130, 152, 0.25);
+  box-shadow: 0px 0px 0px 2px #78829840;
   border: none;
   outline: none;
   transition: all 0.3s ease;
@@ -61,12 +110,8 @@ button:hover {
 .todo-create-input:hover,
 .todo-create-input:active,
 .todo-create-input:focus {
-  box-shadow: 0px 0px 0px 2px rgb(43, 190, 185);
+  box-shadow: 0px 0px 0px 2px #2bbeb9;
   box-shadow: 0px 0px 0px 2px #00ad9f;
-}
-
-.todo-list {
-  max-width: 600px;
 }
 
 .todo-list ul {
@@ -76,19 +121,18 @@ button:hover {
 
 .todo-list li {
   list-style-type: none;
+  margin-bottom: 1.44rem;
 }
 
 .todo-item {
-  display: flex;
-  align-items: center;
-  justify-content: start;
+  display: grid;
+  grid-template-columns: 20px auto;
+  grid-gap: .5rem;
   min-height: 43px;
-
-  padding: 0 20px;
 }
 
-.todo-item > * {
-  margin-left: 20px;
+.todo-item-delete {
+  grid-column: 2/3;
 }
 
 .todo-item-title {
@@ -105,43 +149,45 @@ button:hover {
   background-color: #83ffc1;
 }
 
-.content-stack {
-  display: flex;
-  flex-direction: column;
-}
-
 .app-header {
   background-color: #222;
-  padding: 20px;
+  padding: 1rem;
   color: white;
-  padding-left: 20px;
+
+  max-width: 100vw;
+
+  display: grid;
+  grid-gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.app-header * {
+  margin: 0;
+}
+
+.app-header p {
+  margin: 0.75rem 0;
 }
 
 .app-logo {
-  height: 95px;
-}
-.app-title-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-.app-title-wrapper > div {
-  margin-left: 20px;
-}
-
-.app-title-text {
-  flex-grow: 1;
+  height: 60px;
+  animation: none;
 }
 
 .app-title {
-  font-size: 1.6rem;
+  font-size: 1.44rem;
 }
+
+.app-deploy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .deploy-button {
-  width: 200px;
+  width: 150px;
 }
-.view-src {
-  text-align: center;
-}
+
 .view-src a {
   text-decoration: none;
   color: #fff;
@@ -150,31 +196,78 @@ button:hover {
   justify-content: center;
 }
 .github-icon {
-  width: 25px;
+  width: 40px;
   margin: 5px;
 }
 
-/* Mobile view */
-@media (max-width: 768px) {
-  .app-title-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
+/* Not Mobile view */
+@media (min-width: 550px) {
+  .span-2-1 {
+    grid-column: span 1;
   }
-  .app-title {
-    font-size: 23px;
-  }
-  .app-intro {
-    font-size: 14px;
-  }
-  .app-header {
-    padding-left: 20px;
-    height: auto;
-  }
+
   .app-logo {
-    height: 60px;
-    animation: none;
+    width: 100%;
+    height: 100%;
   }
+
+  .github-icon {
+    width: 50px;
+  }
+
+  .app-title-text,
+  .app-logo-wrap {
+    grid-row: span 2;
+  }
+
+  .app-deploy,
+  .view-src {
+    grid-column: 3/4;
+  }
+
+  .app-header {
+    grid-template-columns: 1fr 4fr 1fr;
+    align-items: center;
+  }
+
+  .todo-item {
+    grid-template-columns: 20px auto 80px;
+
+    padding: .75rem;
+  }
+
+  .todo-item-delete {
+    grid-column: 3/4;
+    align-self: start;
+  }
+}
+
+/* Bigger screens */
+@media (min-width: 1024px) {
   .deploy-button {
-    width: 150px;
+    width: 200px;
+  }
+
+  .app-header {
+    grid-template-columns: 200px 4fr 1fr;
+    align-items: center;
+  }
+
+  .app-title {
+    font-size: 1.72rem;
+  }
+
+  .app-header p {
+    font-size: 1.44rem;
+  }
+
+  
+  .todo-create-wrapper {
+    grid-template-columns: auto 150px;
+  }
+
+  
+  .todo-item {
+    grid-template-columns: 20px auto 150px;
   }
 }

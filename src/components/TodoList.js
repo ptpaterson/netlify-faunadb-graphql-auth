@@ -110,10 +110,9 @@ const TodoItem = ({ todo }) => {
         ></Editor>
       </div>
 
-      <button className='btn-danger' onClick={handleDelete}>
+      <button className='todo-item-delete btn-danger' onClick={handleDelete}>
         delete
       </button>
-      <div className='todo-empty-space'></div>
     </div>
   )
 }

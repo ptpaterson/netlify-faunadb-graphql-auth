@@ -30,26 +30,25 @@ const LoginModal = () => {
     })
   }
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>
-          Email:
-          <input type='text' {...email.bind} placeholder='email' required />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            type='password'
-            {...password.bind}
-            placeholder='password'
-            required
-          />
-        </label>
-      </div>
-      <button type='submit'>Login</button>
-    </form>
+    <div className='login-form'>
+      <form onSubmit={onSubmit}>
+        <label htmlFor={email.value}>Email:</label>
+        <input
+          type='text'
+          {...email.bind}
+          placeholder='email'
+          required
+        />
+        <label htmlFor={password.value}>Password:</label>
+        <input
+          type='password'
+          {...password.bind}
+          placeholder='password'
+          required
+        />
+        <button type='submit' className="span-2-2">Login</button>
+      </form>
+    </div>
   )
 }
 
