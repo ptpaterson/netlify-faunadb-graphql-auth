@@ -139,9 +139,28 @@ async function createFaunaDB(secret) {
 
     console.log(chalk.cyan('\n4) Update generated User Defined Functions..."'))
 
+    // elevated role for public functions
+    await appClient
+      .query(
+        q.CreateRole({
+          name: 'publicFunction',
+          privileges: [
+            {
+              resource: q.Index('unique_User_email'),
+              actions: {
+                read: true
+              }
+            }
+          ]
+        })
+      )
+      .then(createThen(`Role "publicFunction"`))
+      .catch(createCatch(`Role "publicFunction"`))
+
     await appClient
       .query(
         q.Update(q.Function('login'), {
+          role: q.Role("publicFunction"),
           body: q.Query(
             q.Lambda(
               ['input'],
@@ -220,12 +239,6 @@ async function createFaunaDB(secret) {
               resource: q.Function('login'),
               actions: {
                 call: true
-              }
-            },
-            {
-              resource: q.Index('unique_User_email'),
-              actions: {
-                read: true
               }
             }
           ]
