@@ -49,12 +49,11 @@ const link = contextlink.concat(httpLink)
 // 1) Create the remote schema
 // *****************************************************************************
 
-
-/* Having trouble using introspectSchema.  See introspect branch. 
+/* Having trouble using introspectSchema.  See introspect branch.
  * https://github.com/ptpaterson/netlify-faunadb-graphql-auth/tree/introspect
  * using `netlify dev` to run the local server, the function setup code is run
  * on every request, and I have not confirmed whether or not this is a problem
- * on actual Netlify functions. 
+ * on actual Netlify functions.
  */
 // schema was downloaded from fauna and saved to local file.
 const { remoteTypeDefs } = require('./graphql/remoteSchema')
