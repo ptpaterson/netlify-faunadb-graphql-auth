@@ -49,7 +49,6 @@ const link = contextlink.concat(httpLink)
 // 1) Create the remote schema
 // *****************************************************************************
 
-
 // using introspectSchema is not a good idea with a AWS lambda function
 // schema was downloaded from fauna and saved to local file.
 const { remoteTypeDefs } = require('./graphql/remoteSchema')
@@ -99,6 +98,8 @@ const schema = mergeSchemas({
 // *****************************************************************************
 // 5) Run the server
 // *****************************************************************************
+
+console.log('creating server')
 
 const server = new ApolloServer({
   schema,

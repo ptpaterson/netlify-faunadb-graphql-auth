@@ -6,3 +6,6 @@
   publish = "dist"
 
   # note: netlify dev works out of the box with parcel-bundler (or create-react-app)
+  [dev]
+  framework = "parcel"
+  command = "npm run dev"
