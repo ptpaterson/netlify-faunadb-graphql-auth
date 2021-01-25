@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { Client, query: q } = require('faunadb')
 const chalk = require('chalk')
 const request = require('request')
@@ -6,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 
 const { DATABASE_NAME } = require('./config')
+const { writeEnv } = require('./writeEnv')
 
 console.log(chalk.cyan('Creating your FaunaDB Database...\n'))
 
@@ -13,13 +13,13 @@ console.log(chalk.cyan('Creating your FaunaDB Database...\n'))
 if (!process.env.FAUNADB_ADMIN_KEY) {
   console.log(
     chalk.yellow(
-      'Required FAUNADB_SERVER_SECRET enviroment variable not found.'
+      'Required FAUNADB_ADMIN_KEY enviroment variable not found.'
     )
   )
   console.log(
-    `Make sure you have created your Fauna databse with "netlify addons:create fauna"`
+    `Make sure you have generated an admin key and added it to a .env file. See the README for instructions.`
   )
-  console.log(`Then run "npm run bootstrap" to setup your database schema`)
+  console.log(`Then run "npm run bootstrap" to setup your database schema.`)
 
   const insideNetlify = !!process.env.DEPLOY_PRIME_URL
   if (insideNetlify) {
@@ -261,6 +261,11 @@ async function createFaunaDB(secret) {
     console.log(
       chalk.yellow('!') + ' Public client key: ' + chalk.yellow(publicKey)
     )
+
+    /**
+     * Update the `FAUNADB_PUBLIC_KEY` variable in .env.
+     */
+    writeEnv((env) => env.FAUNADB_PUBLIC_KEY = publicKey);
 
     // Regular user.  All users can read their own todos
     await appClient

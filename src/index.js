@@ -7,18 +7,18 @@ import {
   ApolloClient,
   HttpLink,
   InMemoryCache,
-  ApolloProvider
+  ApolloProvider,
 } from '@apollo/client'
 
 const cache = new InMemoryCache()
 
 const link = new HttpLink({
-  uri: '/.netlify/functions/graphql'
+  uri: '/.netlify/functions/graphql',
 })
 
 const client = new ApolloClient({
   cache,
-  link
+  link,
   // resolvers
 })
 

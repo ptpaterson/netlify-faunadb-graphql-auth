@@ -16,8 +16,8 @@ export default function TodoCreateForm() {
     const variables = {
       data: {
         title: title.value,
-        completed: false
-      }
+        completed: false,
+      },
     }
     runUserCreateTodoMutation({
       variables,
@@ -30,13 +30,13 @@ export default function TodoCreateForm() {
             ...meCache?.me,
             todos: {
               __typename: 'TodoPage',
-              data: [...existingTodos, newTodo]
-            }
-          }
+              data: [...existingTodos, newTodo],
+            },
+          },
         }
 
         cache.writeQuery({ query: GET_ME, data: newCache })
-      }
+      },
     })
     title.reset()
   }

@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { Client, query: q } = require('faunadb')
 const chalk = require('chalk')
 
@@ -110,7 +109,7 @@ async function createExampleData(secret) {
       .then(createThen(`Alice Todos`))
       .catch(createCatch(`Alice Todos`))
 
-    return Promise.all([aliceTodoPromise, nancyTodoPromise])
+    return await Promise.all([aliceTodoPromise, nancyTodoPromise])
   } finally {
     if (appServerKey) {
       adminClient.query(

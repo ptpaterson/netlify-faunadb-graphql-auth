@@ -12,7 +12,7 @@ export const useCheckBox = (initialValue, options) => {
       onChange: (event) => {
         setValue(event.target.checked)
         if (options?.onChange) options.onChange(event.target.checked)
-      }
-    }
+      },
+    },
   }
 }

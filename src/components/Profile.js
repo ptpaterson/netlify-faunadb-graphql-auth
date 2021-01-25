@@ -13,7 +13,7 @@ const Profile = () => {
       update(cache) {
         cache.writeQuery({ query: GET_LOGGED_IN, data: { loggedIn: false } })
         cache.writeQuery({ query: GET_ME, data: { me: null } })
-      }
+      },
     })
   }
 

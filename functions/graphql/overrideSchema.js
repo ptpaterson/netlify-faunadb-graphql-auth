@@ -28,7 +28,7 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           secret: cookieSecret
         })
         const alreadyLoggedIn = await userClient
-          .query(q.Get(q.Identity()))
+          .query(q.Get(q.CurrentIdentity()))
           .then((response) => {
             if (!response.message) {
               if (args.data && args.data.email && args.data.email) {
@@ -43,7 +43,8 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
             return false
           })
           .catch((e) => {
-            console.log('error: bad cookie secret', e)
+            console.log('error: bad cookie secret')
+            console.trace(e)
             return false
           })
 
@@ -74,9 +75,7 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           context,
           info
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        .catch(console.trace)
       if (result) {
         context.setCookies.push({
           name: 'fauna-token',
@@ -107,9 +106,7 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           context,
           info
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        .catch(console.trace)
 
       // kill the cookie
       context.setCookies.push({
