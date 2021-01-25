@@ -6,7 +6,7 @@ const q = faunadb.query
 
 const localTypeDefs = gql`
   type Query {
-    loggedIn: String!
+    loggedIn: Boolean!
   }
 `
 
