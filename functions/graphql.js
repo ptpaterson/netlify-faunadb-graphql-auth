@@ -97,7 +97,7 @@ const {
 // *****************************************************************************
 
 const schema = mergeSchemas({
-  schemas: [overrideTypeDefs, localExecutableSchema, transformedRemoteSchema],
+  schemas: [transformedRemoteSchema, overrideTypeDefs, localExecutableSchema],
   resolvers: createOverrideResolvers(remoteExecutableSchema),
 })
 
