@@ -24,7 +24,7 @@ It has been updated to be better and more responsive stylings!
 
 So there is no need to install `netlify-lambda` and set up function proxies.
 
-## Initial setup
+## Setup
 
 ### 1. Clone down the repository
 
@@ -45,8 +45,6 @@ npm install
 # -OR-
 yarn
 ```
-
-## Configure Fauna database
 
 ### 4. Sign up for a FaunaDB account
 
@@ -140,15 +138,13 @@ In the Fauna Cloud Console:
   - Click “IMPORT SCHEMA”
   - Upload the schema at [`scripts/faunaSchema.graphql`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/scripts/faunaSchema.graphql)
 
-## Develop
-
 ### 11. Get `netlify-cli`
 
 ```bash
 npm install netlify-cli -g
 ```
 
-### 12. Run the project
+### 12. Start developing!
 
 ```bash
 # serve development version
