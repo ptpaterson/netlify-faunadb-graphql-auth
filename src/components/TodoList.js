@@ -23,7 +23,7 @@ const TodoItem = ({ todo }) => {
     const newTitle = editorState.getCurrentContent().getPlainText()
     const variables = {
       data: { title: newTitle, completed },
-      id: _id
+      id: _id,
     }
     runUpdateTodoMutation({
       variables,
@@ -38,15 +38,15 @@ const TodoItem = ({ todo }) => {
               completed
             }
           `,
-          data
+          data,
         })
-      }
+      },
     })
   }
   const handleUpdate = (newData) => {
     const variables = {
       data: Object.assign({ title, completed }, newData),
-      id: _id
+      id: _id,
     }
     runUpdateTodoMutation({
       variables,
@@ -61,15 +61,15 @@ const TodoItem = ({ todo }) => {
               completed
             }
           `,
-          data
+          data,
         })
-      }
+      },
     })
   }
 
   const handleDelete = () => {
     const variables = {
-      id: _id
+      id: _id,
     }
     runDeleteTodoMutation({
       variables,
@@ -83,18 +83,18 @@ const TodoItem = ({ todo }) => {
             ...meCache?.me,
             todos: {
               __typename: 'TodoPage',
-              data: filteredTodos
-            }
-          }
+              data: filteredTodos,
+            },
+          },
         }
 
         cache.writeQuery({ query: GET_ME, data: newCache })
-      }
+      },
     })
   }
 
   const checkState = useCheckBox(completed, {
-    onChange: (checked) => handleUpdate({ completed: checked })
+    onChange: (checked) => handleUpdate({ completed: checked }),
   })
 
   return (

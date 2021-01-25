@@ -262,10 +262,10 @@ async function createFaunaDB(secret) {
       chalk.yellow('!') + ' Public client key: ' + chalk.yellow(publicKey)
     )
 
-    writeEnv((env) => {
-      env.FAUNADB_PUBLIC_KEY = publicKey;
-      console.log('Added FAUNADB_PUBLIC_KEY variable to', chalk.dim('.env'));
-    });
+    /**
+     * Update the `FAUNADB_PUBLIC_KEY` variable in .env.
+     */
+    writeEnv((env) => env.FAUNADB_PUBLIC_KEY = publicKey);
 
     // Regular user.  All users can read their own todos
     await appClient

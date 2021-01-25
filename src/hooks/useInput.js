@@ -12,7 +12,7 @@ export const useInput = (initialValue, options) => {
       onChange: (event) => {
         setValue(event.target.value)
         if (options?.onChange) options.onChange(event.target.value)
-      }
-    }
+      },
+    },
   }
 }

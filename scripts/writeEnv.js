@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 const modifyEnv = (transform) => {
     const env = require('dotenv').config().parsed;
@@ -11,6 +12,7 @@ const writeEnv = (transform) => {
     const modified = modifyEnv(transform);
     for (const [key, val] of Object.entries(modified)) {
         out += `${key}="${val}"\n`;
+        console.log(`Wrote ${chalk.green('.env')} variable ${chalk.yellow(key)}`);
     }
     fs.writeFileSync('.env', out);
 }

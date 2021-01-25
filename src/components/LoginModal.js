@@ -10,9 +10,9 @@ const LoginModal = () => {
     update(cache, { data }) {
       cache.writeQuery({
         query: GET_LOGGED_IN,
-        data: { loggedIn: data.login }
+        data: { loggedIn: data.login },
       })
-    }
+    },
   })
 
   const email = useInput('')
@@ -24,21 +24,16 @@ const LoginModal = () => {
       variables: {
         data: {
           email: email.value,
-          password: password.value
-        }
-      }
+          password: password.value,
+        },
+      },
     })
   }
   return (
     <div className='login-form'>
       <form onSubmit={onSubmit}>
         <label htmlFor={email.value}>Email:</label>
-        <input
-          type='text'
-          {...email.bind}
-          placeholder='email'
-          required
-        />
+        <input type='text' {...email.bind} placeholder='email' required />
         <label htmlFor={password.value}>Password:</label>
         <input
           type='password'
@@ -46,7 +41,9 @@ const LoginModal = () => {
           placeholder='password'
           required
         />
-        <button type='submit' className="span-2-2">Login</button>
+        <button type='submit' className='span-2-2'>
+          Login
+        </button>
       </form>
     </div>
   )
