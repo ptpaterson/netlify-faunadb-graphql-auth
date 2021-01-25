@@ -7,7 +7,7 @@
     "create-data": "netlify dev:exec node scripts/create-example-data.js",
     "bootstrap": "yarn create-db && yarn create-data",
     "build": "parcel build src/index.html",
-    "dev": "parcel src/index.html",
+    "dev": "parcel src/index.html 1> /dev/null",
     "format": "prettier \"src/**/*.{js,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
   },
