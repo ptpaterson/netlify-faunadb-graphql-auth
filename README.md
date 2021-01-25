@@ -82,7 +82,7 @@ an environment variable:
 
 ```bash
 # .env
-FAUNADB_SERVER_SECRET="YOUR_SECRET_KEY_HERE"
+FAUNADB_ADMIN_KEY="YOUR_SECRET_KEY_HERE"
 ```
 
 > NOTE: The `bootstrap` script will store another environment variable in this
@@ -130,21 +130,13 @@ Fauna Database schema has been created
 Claim your fauna database with "netlify addons:auth fauna"
 ```
 
-### 10. Upload Graphql Schema
-
-In the Fauna Cloud Console:
-
-  - Click “GraphQL” in the left navigation
-  - Click “IMPORT SCHEMA”
-  - Upload the schema at [`scripts/faunaSchema.graphql`](https://github.com/ptpaterson/netlify-faunadb-graphql-auth/blob/master/scripts/faunaSchema.graphql)
-
-### 11. Get `netlify-cli`
+### 10. Get `netlify-cli`
 
 ```bash
 npm install netlify-cli -g
 ```
 
-### 12. Start developing!
+### 11. Start developing!
 
 ```bash
 # serve development version

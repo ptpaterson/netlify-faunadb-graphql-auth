@@ -10,10 +10,10 @@ const { writeEnv } = require('./writeEnv')
 console.log(chalk.cyan('Creating your FaunaDB Database...\n'))
 
 // 1. Check for required enviroment variables
-if (!process.env.FAUNADB_SERVER_SECRET) {
+if (!process.env.FAUNADB_ADMIN_KEY) {
   console.log(
     chalk.yellow(
-      'Required FAUNADB_SERVER_SECRET enviroment variable not found.'
+      'Required FAUNADB_ADMIN_KEY enviroment variable not found.'
     )
   )
   console.log(
@@ -60,8 +60,8 @@ const updateCatch = (e) => {
 }
 
 // Has var. Do the thing
-if (process.env.FAUNADB_SERVER_SECRET) {
-  createFaunaDB(process.env.FAUNADB_SERVER_SECRET)
+if (process.env.FAUNADB_ADMIN_KEY) {
+  createFaunaDB(process.env.FAUNADB_ADMIN_KEY)
     .then(() => {
       console.log(chalk.green('\nFauna Database schema has been created'))
       console.log(

@@ -22,8 +22,8 @@ const createCatch = (typeName) => (e) => {
   }
 }
 
-if (process.env.FAUNADB_SERVER_SECRET) {
-  createExampleData(process.env.FAUNADB_SERVER_SECRET)
+if (process.env.FAUNADB_ADMIN_KEY) {
+  createExampleData(process.env.FAUNADB_ADMIN_KEY)
     .then(() => {
       console.log(chalk.green('\nExample data is created'))
     })
