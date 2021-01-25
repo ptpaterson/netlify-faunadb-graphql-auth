@@ -27,20 +27,20 @@ const TodoItem = ({ todo }) => {
     }
     runUpdateTodoMutation({
       variables,
-      update(cache, { data }) {
-        cache.writeFragment({
-          _id,
-          fragment: gql`
-            fragment myTodo on Todo {
-              _id
-              _ts
-              title
-              completed
-            }
-          `,
-          data,
-        })
-      },
+      // update(cache, { data }) {
+      //   cache.writeFragment({
+      //     _id,
+      //     fragment: gql`
+      //       fragment myTodo on Todo {
+      //         _id
+      //         _ts
+      //         title
+      //         completed
+      //       }
+      //     `,
+      //     data,
+      //   })
+      // },
     })
   }
   const handleUpdate = (newData) => {
@@ -50,20 +50,20 @@ const TodoItem = ({ todo }) => {
     }
     runUpdateTodoMutation({
       variables,
-      update(cache, { data }) {
-        cache.writeFragment({
-          _id,
-          fragment: gql`
-            fragment myTodo on Todo {
-              _id
-              _ts
-              title
-              completed
-            }
-          `,
-          data,
-        })
-      },
+      // update(cache, { data }) {
+      //   cache.writeFragment({
+      //     _id,
+      //     fragment: gql`
+      //       fragment myTodo on Todo {
+      //         _id
+      //         _ts
+      //         title
+      //         completed
+      //       }
+      //     `,
+      //     data,
+      //   })
+      // },
     })
   }
 
