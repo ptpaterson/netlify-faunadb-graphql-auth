@@ -12,7 +12,7 @@ const {
   mergeSchemas,
   makeExecutableSchema,
   makeRemoteExecutableSchema,
-  transformSchema
+  transformSchema,
 } = require('apollo-server-lambda')
 
 const { setContext } = require('apollo-link-context')
@@ -23,7 +23,7 @@ const cookie = require('cookie')
 
 const httpLink = new createHttpLink({
   uri: 'https://graphql.fauna.com/graphql',
-  fetch
+  fetch,
 })
 
 // setContext links runs before any remote request by `delegateToSchema`
@@ -39,8 +39,8 @@ const contextlink = setContext((_, previousContext) => {
 
   return {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   }
 })
 
@@ -60,7 +60,7 @@ const link = contextlink.concat(httpLink)
 const { remoteTypeDefs } = require('./graphql/remoteSchema')
 const remoteExecutableSchema = makeRemoteExecutableSchema({
   schema: remoteTypeDefs,
-  link
+  link,
 })
 
 // remove root fields that we don't want available to the client
@@ -70,7 +70,7 @@ const transformedRemoteSchema = transformSchema(remoteExecutableSchema, [
       !['createTodo', 'createUser', 'deleteUser', 'findUserByID'].includes(
         rootField
       )
-  )
+  ),
 ])
 
 // *****************************************************************************
@@ -80,7 +80,7 @@ const transformedRemoteSchema = transformSchema(remoteExecutableSchema, [
 const { localTypeDefs, localResolvers } = require('./graphql/localSchema')
 const localExecutableSchema = makeExecutableSchema({
   typeDefs: localTypeDefs,
-  resolvers: localResolvers
+  resolvers: localResolvers,
 })
 
 // *****************************************************************************
@@ -89,7 +89,7 @@ const localExecutableSchema = makeExecutableSchema({
 
 const {
   overrideTypeDefs,
-  createOverrideResolvers
+  createOverrideResolvers,
 } = require('./graphql/overrideSchema')
 
 // *****************************************************************************
@@ -98,7 +98,7 @@ const {
 
 const schema = mergeSchemas({
   schemas: [overrideTypeDefs, localExecutableSchema, transformedRemoteSchema],
-  resolvers: createOverrideResolvers(remoteExecutableSchema)
+  resolvers: createOverrideResolvers(remoteExecutableSchema),
 })
 
 // *****************************************************************************
@@ -117,9 +117,9 @@ const server = new ApolloServer({
       event,
       context,
       setCookies: [],
-      setHeaders: []
+      setHeaders: [],
     }
-  }
+  },
 })
 
 exports.handler = server.createHandler()

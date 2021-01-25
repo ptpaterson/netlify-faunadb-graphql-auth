@@ -64,7 +64,7 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
         return false
       }
 
-      if (!args.data || !args.data.email || !args.data.email) return false
+      if (!args.data || !args.data.email) return false
 
       const result = await info.mergeInfo
         .delegateToSchema({
@@ -75,7 +75,11 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           context,
           info,
         })
-        .catch(console.trace)
+        .catch((e) => {
+          console.error(e.message)
+          console.trace(e)
+          return false
+        })
       if (result) {
         context.setCookies.push({
           name: 'fauna-token',
@@ -106,7 +110,11 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           context,
           info,
         })
-        .catch(console.trace)
+        .catch((e) => {
+          console.error(e.message)
+          console.trace(e)
+          return false
+        })
 
       // kill the cookie
       context.setCookies.push({
