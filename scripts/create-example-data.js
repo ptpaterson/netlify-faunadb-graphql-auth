@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { Client, query: q } = require('faunadb')
 const chalk = require('chalk')
 
@@ -23,8 +22,8 @@ const createCatch = (typeName) => (e) => {
   }
 }
 
-if (process.env.FAUNADB_ADMIN_KEY) {
-  createExampleData(process.env.FAUNADB_ADMIN_KEY)
+if (process.env.FAUNADB_SERVER_SECRET) {
+  createExampleData(process.env.FAUNADB_SERVER_SECRET)
     .then(() => {
       console.log(chalk.green('\nExample data is created'))
     })
@@ -110,7 +109,7 @@ async function createExampleData(secret) {
       .then(createThen(`Alice Todos`))
       .catch(createCatch(`Alice Todos`))
 
-    return Promise.all([aliceTodoPromise, nancyTodoPromise])
+    return await Promise.all([aliceTodoPromise, nancyTodoPromise])
   } finally {
     if (appServerKey) {
       adminClient.query(

@@ -5,14 +5,15 @@ const fs = require('fs')
 const path = require('path')
 
 const { DATABASE_NAME } = require('./config')
+const { writeEnv } = require('./writeEnv')
 
 console.log(chalk.cyan('Creating your FaunaDB Database...\n'))
 
 // 1. Check for required enviroment variables
-if (!process.env.FAUNADB_ADMIN_KEY) {
+if (!process.env.FAUNADB_SERVER_SECRET) {
   console.log(
     chalk.yellow(
-      'Required FAUNADB_ADMIN_KEY enviroment variable not found.'
+      'Required FAUNADB_SERVER_SECRET enviroment variable not found.'
     )
   )
   console.log(
@@ -59,8 +60,8 @@ const updateCatch = (e) => {
 }
 
 // Has var. Do the thing
-if (process.env.FAUNADB_ADMIN_KEY) {
-  createFaunaDB(process.env.FAUNADB_ADMIN_KEY)
+if (process.env.FAUNADB_SERVER_SECRET) {
+  createFaunaDB(process.env.FAUNADB_SERVER_SECRET)
     .then(() => {
       console.log(chalk.green('\nFauna Database schema has been created'))
       console.log(
@@ -260,6 +261,11 @@ async function createFaunaDB(secret) {
     console.log(
       chalk.yellow('!') + ' Public client key: ' + chalk.yellow(publicKey)
     )
+
+    writeEnv((env) => {
+      env.FAUNADB_PUBLIC_KEY = publicKey;
+      console.log('Added FAUNADB_PUBLIC_KEY variable to', chalk.dim('.env'));
+    });
 
     // Regular user.  All users can read their own todos
     await appClient
