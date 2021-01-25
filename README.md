@@ -92,7 +92,7 @@ FAUNADB_ADMIN_KEY="YOUR_SECRET_KEY_HERE"
 
 ```bash
 # create database and fill with example data
-yarn bootstrap
+npm run bootstrap
 ```
 
 This `bootstrap` package.json script will create a Fauna database called

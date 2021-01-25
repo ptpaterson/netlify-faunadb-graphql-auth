@@ -5,7 +5,7 @@
   "scripts": {
     "create-db": "netlify dev:exec node scripts/create-database.js",
     "create-data": "netlify dev:exec node scripts/create-example-data.js",
-    "bootstrap": "yarn create-db && yarn create-data",
+    "bootstrap": "npm run create-db && npm run create-data",
     "build": "parcel build src/index.html",
     "dev": "parcel --log-level 2 src/index.html",
     "format": "prettier \"src/**/*.{js,html}\" --write",
