@@ -11,7 +11,7 @@ const overrideTypeDefs = gql`
   }
 
   type Mutation {
-    login(data: LoginInput): String! @resolver(name: "login")
+    login(data: LoginInput): Boolean!
   }
 `
 
@@ -25,13 +25,13 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
         const parsedCookie = cookie.parse(context.event.headers.cookie)
         const cookieSecret = parsedCookie['fauna-token']
         const userClient = new faunadb.Client({
-          secret: cookieSecret
+          secret: cookieSecret,
         })
         const alreadyLoggedIn = await userClient
           .query(q.Get(q.CurrentIdentity()))
           .then((response) => {
             if (!response.message) {
-              if (args.data && args.data.email && args.data.email) {
+              if (args.data && args.data.email && response.data.email) {
                 // TODO trying to log in as someone else besides cookie holder.
                 // should probably log them out first!
                 return response.data.email === args.data.email
@@ -57,8 +57,8 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
             value: '',
             options: {
               httpOnly: true,
-              expires: new Date()
-            }
+              expires: new Date(),
+            },
           })
         }
         return false
@@ -73,7 +73,7 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           fieldName: 'login',
           args,
           context,
-          info
+          info,
         })
         .catch(console.trace)
       if (result) {
@@ -82,8 +82,8 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           value: result,
           options: {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production'
-          }
+            secure: process.env.NODE_ENV === 'production',
+          },
         })
         return true
       }
@@ -104,7 +104,7 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
           fieldName: 'logout',
           args,
           context,
-          info
+          info,
         })
         .catch(console.trace)
 
@@ -114,16 +114,16 @@ const createOverrideResolvers = (remoteExecutableSchema) => ({
         value: '',
         options: {
           httpOnly: true,
-          expires: new Date()
-        }
+          expires: new Date(),
+        },
       })
 
       return true
-    }
-  }
+    },
+  },
 })
 
 module.exports = {
   overrideTypeDefs,
-  createOverrideResolvers
+  createOverrideResolvers,
 }

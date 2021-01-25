@@ -6,11 +6,11 @@ const q = faunadb.query
 
 const localTypeDefs = gql`
   type Query {
-    loggedIn: Boolean!
+    loggedIn: String!
   }
 `
 
-const localResolvers ={
+const localResolvers = {
   Query: {
     loggedIn: async (root, args, context) => {
       console.log('LOCAL query loggedIn')
@@ -20,7 +20,7 @@ const localResolvers ={
         const parsedCookie = cookie.parse(context.event.headers.cookie)
         const cookieSecret = parsedCookie['fauna-token']
         const userClient = new faunadb.Client({
-          secret: cookieSecret
+          secret: cookieSecret,
         })
         result = await userClient
           .query(q.Get(q.Identity()))
@@ -39,8 +39,8 @@ const localResolvers ={
             value: '',
             options: {
               httpOnly: true,
-              expires: new Date()
-            }
+              expires: new Date(),
+            },
           })
         }
       }
@@ -48,11 +48,11 @@ const localResolvers ={
       return new Promise((resolve) => {
         setTimeout(resolve, 800)
       }).then(() => result)
-    }
+    },
   },
 }
 
 module.exports = {
   localTypeDefs,
-  localResolvers
+  localResolvers,
 }
